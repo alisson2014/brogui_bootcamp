@@ -6,19 +6,17 @@ include "config.php";
 <html lang="pt-br">
 
 <head>
+    <!-- Tipografia Fonte Roboto 500-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet" />
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Brogui</title>
     <!-- CSS + Favicon -->
-    <link rel="shortcut icon" href="imagens/icone.png">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- JavaScript -->
-    <script type="text/javascript" src='javascript/menu-bottom.js'></script>
-    <!-- Tipografia: -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="imagens/icone.png" />
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
@@ -26,11 +24,11 @@ include "config.php";
         <a href="index.php" title="Home - Brogui">
             <img src="images/logo.png" alt="Brogui">
         </a>
-        <a href="javascript:;" id="menu" onclick="mostrarMenu()">
-            <img src="images/menu.webp" alt="Menu">
-        </a>
-        <nav class="menu">
-            <ul>
+        <nav id="nav">
+            <button aria-label="Abrir menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
+                <span id="hamburguer"></span>
+            </button>
+            <ul id="menu" role="menu">
                 <li>
                     <a href="index.php?pagina=home" class="anim-link">
                         Home
@@ -106,8 +104,7 @@ include "config.php";
         <img src="images/logo.png" alt="Brogui">
         <p>Desenvolvido por Alisson</p>
     </footer>
-
-
+    <script src="javascript/menu.js"></script>
 </body>
 
 </html>
