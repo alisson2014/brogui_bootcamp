@@ -33,11 +33,11 @@ if (empty($id)) {
         $titulo = $dados["titulo"];
         $data = $dados["data"];
 
-        echo "<h2>{$titulo}</h2>
-        <p>Data da postagem: {$data}</p>
-        <a href='index.php?pagina=noticia&id={$id}' class='anim-link'>
-            Ler mais
-        </a>
-        <hr>";
+        echo "
+            <h2>{$titulo}</h2>
+            <p>Data da postagem: {$data}</p>
+            <a href='index.php?pagina=noticia&id={$id}'>Ler mais</a>
+            <hr>
+            ";
     }
 }

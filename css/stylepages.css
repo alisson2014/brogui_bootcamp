@@ -1,35 +1,48 @@
+.noticia {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 h1 {
-  margin-bottom: 2rem;
-  font-size: 2.4rem;
-  font-weight: bold;
+  font-size: 2.5rem;
+  font-weight: bolder;
+  margin-bottom: 1rem;
 }
 
 h2 {
-  font-size: 1.64rem;
+  font-size: 1.6rem;
   font-weight: bold;
 }
 
 p {
-  margin-bottom: 1rem;
   font-size: 1.2rem;
-  font-weight: 30;
+  font-weight: lighter;
   font-style: italic;
 }
 
+a:hover {
+  color: #389aa1;
+}
+
 hr {
-  margin-bottom: 0.5rem;
+  margin-bottom: .6rem;
 }
 
 @media (max-width: 420px) {
   h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   h2 {
-    font-size: 1.54rem;
+    font-size: 1.4rem;
   }
 
   p {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
+  }
+
+  hr {
+    margin-bottom: 1rem;
   }
 }

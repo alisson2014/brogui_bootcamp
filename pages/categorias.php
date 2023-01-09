@@ -1,8 +1,5 @@
-<h1 style="
-margin-bottom: 2rem;
-font-size: 2.4rem;
-font-weight: bold;
-">Categorias de Notícias</h1>
+<link rel="stylesheet" href="css/stylepages.css">
+<h1>Categorias de Notícias</h1>
 <ul>
     <?php
     //selecionar as categorias
@@ -17,11 +14,9 @@ font-weight: bold;
         $categoria = $dados["categoria"];
 
         echo "
-            <li>
-                <a href='index.php?pagina=categoria&id={$id}' class='anim-link'>
-                    {$categoria}
-                </a>
-            </li>
+                <li>
+                    <a href='index.php?pagina=categoria&id={$id}'>{$categoria}</a>
+                </li>
             ";
     }
     ?>

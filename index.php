@@ -30,19 +30,13 @@ include "config.php";
             </button>
             <ul id="menu" role="menu">
                 <li>
-                    <a href="index.php?pagina=home" class="anim-link">
-                        Home
-                    </a>
+                    <a href="index.php?pagina=home" class="anim-link">Home</a>
                 </li>
                 <li>
-                    <a href="index.php?pagina=noticias" class="anim-link">
-                        Notícias
-                    </a>
+                    <a href="index.php?pagina=noticias" class="anim-link">Notícias</a>
                 </li>
                 <li>
-                    <a href="index.php?pagina=categorias" class="anim-link">
-                        Categorias
-                    </a>
+                    <a href="index.php?pagina=categorias" class="anim-link">Categorias</a>
                 </li>
             </ul>
         </nav>
@@ -85,12 +79,9 @@ include "config.php";
                             //titulo maiusculo
                             $titulo = strtoupper($titulo);
 
-                            echo
-                            "
+                            echo "
                                     <li>
-                                        <a href='index.php?pagina=noticia&id={$id}'>
-                                            {$titulo}
-                                        <a>
+                                        <a href='index.php?pagina=noticia&id={$id}'>{$titulo}<a>
                                     </li>
                                 ";
                         }
@@ -100,6 +91,7 @@ include "config.php";
             </div>
         </div>
     </main>
+
     <footer>
         <img src="images/logo.png" alt="Brogui">
         <p>Desenvolvido por Alisson</p>

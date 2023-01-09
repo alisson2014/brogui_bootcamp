@@ -14,13 +14,13 @@ while ($dados = mysqli_fetch_array($consulta)) {
     $data = $dados["data"];
 
     echo "
-            <h2>{$titulo}</h2>
-
-            <p>Postado em: {$data}</p>
-
-            <a href='index.php?pagina=noticia&id={$id}' class='anim-link'>
-                Ler Notícia
-            </a>
+            <div class='noticia'>
+                <div>
+                    <h2>{$titulo}</h2>
+                    <p>Postado em: {$data}</p>
+                </div>
+                <a href='index.php?pagina=noticia&id={$id}'>Ler Notícia</a>
+            </div>
             <hr>
         ";
 }

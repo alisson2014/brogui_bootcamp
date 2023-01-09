@@ -29,7 +29,7 @@ if (empty($id)) {
     echo "<p style='
     margin-bottom: 1rem;
     font-size: 1.2rem;
-    font-weight: 30;
+    font-weight: 100;
     font-style: italic;
     '>Data da Postagem: {$data}</p>";
     echo nl2br($texto);
