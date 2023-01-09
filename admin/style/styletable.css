@@ -1,0 +1,36 @@
+h1 {
+  margin: 1rem 2.8rem;
+}
+
+table {
+  width: 100%;
+  padding: 1rem;
+}
+
+table thead tr {
+  background-color: var(--bg-color);
+}
+
+table td {
+  color: var(--text-color);
+  text-align: center;
+}
+
+table thead tr td {
+  border: 0.08rem solid var(--text-color);
+  font-size: 1.11rem;
+}
+
+table tbody tr td {
+  border: 0.08rem solid var(--link-color);
+  font-size: 1.1rem;
+}
+
+table tbody tr td a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+table tbody tr td a:hover {
+  border-bottom: 0.17rem solid var(--link-color-hover);
+}

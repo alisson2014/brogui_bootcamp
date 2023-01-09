@@ -1,0 +1,70 @@
+/* Estilização da class login */
+.login {
+  /* Display flex para alinhar os itens */
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  /* Tamanhos do form */
+  border-radius: 1rem;
+  width: fit-content;
+  margin: 4rem auto;
+  padding: 1.64rem 1.2rem;
+  /* Estilo do form com sombra */
+  box-shadow: 0 0 0.4rem var(--link-color);
+  background-color: var(--bg-header-footer-color);
+}
+
+/* Tamanho da fonte + alinhamento ao centro */
+.login h1 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+/* Cores dos textos */
+.login h1,
+.login form label {
+  color: var(--link-color);
+}
+
+/* Display flex para distanciar os intens */
+.login form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Tamanho da fonte do label */
+.login form label {
+  font-size: 1.5rem;
+}
+
+/* Ajustes no campo input */
+.login form .campo {
+  border-radius: 0.85rem;
+  padding: 0.35rem;
+  font-size: 1.2rem;
+}
+
+/* Background hover do campo input */
+.login form .campo:hover {
+  background-color: var(--bg-color);
+}
+
+/* Estilização do botão entrar */
+.login form button {
+  /*Cor de fundo e de texto */
+  background-color: var(--link-color-hover);
+  color: var(--link-color);
+  /* Alinhamento do tamanho */
+  border-radius: 0.6rem;
+  width: 100%;
+  padding: 0.2rem;
+  margin-top: 0.65rem;
+  font-size: 1.1rem;
+}
+
+@media (min-width: 420px) {
+  .login {
+    width: auto;
+  }
+}
