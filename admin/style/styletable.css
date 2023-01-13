@@ -8,12 +8,12 @@ table {
 }
 
 table thead tr {
-  background-color: var(--bg-color);
+  background-color: #CCC;
 }
 
 table td {
-  color: var(--text-color);
   text-align: center;
+  background-color: #CCC;
 }
 
 table thead tr td {
@@ -22,15 +22,14 @@ table thead tr td {
 }
 
 table tbody tr td {
-  border: 0.08rem solid var(--link-color);
+  border: 0.08rem solid #222;
   font-size: 1.1rem;
 }
 
 table tbody tr td a {
-  color: var(--text-color);
   text-decoration: none;
 }
 
 table tbody tr td a:hover {
-  border-bottom: 0.17rem solid var(--link-color-hover);
+  color: var(--link-color-hover);
 }

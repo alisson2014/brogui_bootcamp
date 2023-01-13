@@ -3,16 +3,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
 }
 
 /* Criação de variáveis para guardar cores */
 :root {
-  --bg-color: #DDD;
+  --bg-color: #CCC;
   --bg-header-footer-color: #777;
-  --link-color: #222;
   --text-color: #111;
-  --link-color-hover: #12D;
+  --link-color-hover: #EED;
+  --border: 2px solid #111;
 }
 
 /* Corpo da página + fonte roboto */
@@ -20,10 +19,14 @@ body {
   background-color: var(--bg-color);
 }
 
+body * {
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-color);
+}
+
 /* Link hover animado */
 .anim-link {
   display: inline-block;
-  color: var(--link-color);
   text-decoration: none;
 }
 
@@ -32,12 +35,16 @@ body {
   display: block;
   width: 0;
   height: 0.2rem;
-  background: var(--link-color);
+  background: var(--link-color-hover);
   transition: width .3s;
 }
 
 .anim-link:hover::after {
   width: 100%;
+}
+
+a.anim-link:hover {
+  color: var(--link-color-hover);
 }
 
 /* Estilização da página categoria */
@@ -57,21 +64,27 @@ body {
 .container header {
   display: flex;
   justify-content: space-around;
-  background-color: var(--bg-header-footer-color);
+  align-items: center;
+  padding: 1.5rem .5rem;
+  border-bottom: var(--border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 /* Estilização do link administrador */
 .container header .logo {
   text-decoration: none;
-  color: var(--link-color);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  font-weight: 999;
 }
 
 /* Alinhamento dos itens da lista */
 .container header nav ul {
   list-style: none;
+  width: 30vw;
   display: flex;
-  gap: 2.5rem;
+  justify-content: space-around;
+  align-items: center;
 }
 
 /* Estilização dos links */
@@ -93,12 +106,7 @@ body {
   border-radius: 1rem;
   /* Sombra + cor de fundo */
   box-shadow: 0 0 0.75rem var(--link-color);
-}
-
-/* Cor do h1 e do label */
-.container main h1,
-.container main label {
-  color: var(--link-color);
+  background-color: #888;
 }
 
 /* Estilização do h1 */
@@ -115,9 +123,8 @@ body {
 }
 
 /* Estilização dos botões do main */
-.container main p .btn {
-  background-color: var(--link-color-hover);
-  color: var(--link-color);
+.btn {
+  background-color: rgb(191, 116, 31);
   border-radius: 0.6rem;
   padding: 0.3rem 0.55rem;
   margin: auto;
@@ -125,9 +132,8 @@ body {
   text-decoration: none;
 }
 
-/* Sombra da linha que corta o main */
-.container main hr {
-  box-shadow: 0 0 0.1rem var(--link-color);
+.btn:hover {
+  transform: scale(1.02);
 }
 
 /* Display flex para alinhar os filhos do form*/
@@ -156,27 +162,31 @@ body {
 }
 
 /* Hover dos links */
-.container main form .campo:hover {
+.container main form .campo:focus {
   background-color: var(--bg-color);
 }
 
 /* Estilização do botão do form */
 .container main form button {
-  background-color: var(--link-color-hover);
-  color: var(--link-color);
+  background-color: rgb(191, 116, 31);
+  cursor: pointer;
   font-size: 1.1rem;
+  border: none;
   border-radius: 0.6rem;
   padding: 0.3rem 0.5rem;
   margin: 0 auto 0.4rem;
 }
 
+.container main form button:hover {
+  transform: scale(1.02);
+}
+
 /* Estilização do rodapé da página */
 .container footer {
-  background-color: var(--bg-header-footer-color);
+  border-top: var(--border);
   padding: 0.65rem 0;
 }
 
 .container footer p {
-  color: var(--link-color);
   font-size: 1.2rem;
 }
