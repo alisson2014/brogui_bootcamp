@@ -22,7 +22,11 @@ p {
 }
 
 a:hover {
-  color: #389aa1;
+  color: var(--link-color-hover);
+}
+
+ul {
+  list-style: square;
 }
 
 hr {
