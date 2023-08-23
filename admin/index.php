@@ -1,8 +1,6 @@
 <?php
-//iniciar a sessão
 session_start();
-//conectar com o banco de dados
-include "../config.php";
+require_once "../config.php";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -23,12 +21,9 @@ include "../config.php";
 <body>
   <div class="container">
     <?php
-    //Verificar se não está logado
     if (!isset($_SESSION["brogui"])) {
-      //tela de login
-      include "login.php";
+      require_once "login.php";
     } else {
-      //login do usuário registro
       $login = $_SESSION["brogui"]["login"];
     ?>
       <header>
@@ -63,21 +58,16 @@ include "../config.php";
       </header>
       <main>
         <?php
-        //recuperar a ação e a tabela
         $acao = $_GET["acao"] ?? "paginas";
         $tabela = $_GET["tabela"] ?? "home";
 
-        //acao = register e tabela = categoria
-        //register/categoria.php
         $arquivo = "{$acao}/{$tabela}.php";
-
-
 
         //verificar se o arquivo existe
         if (file_exists($arquivo)) {
-          include $arquivo;
+          require_once $arquivo;
         } else {
-          include "pages/error.php";
+          require_once "pages/error.php";
         }
         ?>
       </main>
