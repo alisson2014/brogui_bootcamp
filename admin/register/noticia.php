@@ -48,14 +48,12 @@ $categoria_id = $dados["categoria_id"] ?? NULL;
   <select name="categoria_id" id="categoria_id" required class="campo">
     <option value=""></option>
     <?php
-    //selecionar todas as categorias
     $sql = "SELECT * FROM categoria ORDER BY categoria";
-    //executar o sql
-    $consulta = mysqli_query($con, $sql);
-    while ($dados = mysqli_fetch_array($consulta)) {
-      //recuperar os valores 
-      $id = $dados["id"];
-      $categoria = $dados["categoria"];
+    $dados = $conn->query($sql)->fetchAll();
+
+    foreach ($dados as $dado) {
+      $id = $dado["id"];
+      $categoria = $dado["categoria"];
 
       echo "<option value='{$id}'>{$categoria}</option>";
     }

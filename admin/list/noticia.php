@@ -16,14 +16,11 @@
   </thead>
   <tbody>
     <?php
-    //selecionar as categorias
     $sql = "SELECT * FROM noticia";
-    //executar o sql
-    $consulta = mysqli_query($con, $sql);
-    //laço de repetição para retirar os resultados
-    while ($dados = mysqli_fetch_array($consulta)) {
-      $id = $dados["id"];
-      $titulo = $dados["titulo"];
+    $dados = $conn->query($sql)->fetchAll();
+    foreach ($dados as $dado) {
+      $id = $dado["id"];
+      $titulo = $dado["titulo"];
     ?>
       <tr>
         <td> <?= $id ?> </td>

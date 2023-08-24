@@ -13,12 +13,11 @@ if (empty($login)) {
 
 $sql = "SELECT * FROM usuario WHERE login = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bindValue(1, $id, \PDO::PARAM_INT);
+$stmt->bindValue(1, $login, \PDO::PARAM_INT);
 $stmt->execute();
 $data = $stmt->fetch();
 
 $id = $data["id"] ?? NULL;
-var_dump($data);
 
 if (empty($id)) {
   mensagem("Usuário ou senha inválidos");

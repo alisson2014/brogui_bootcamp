@@ -16,19 +16,34 @@ if (empty($titulo)) {
   mensagem("Selecione uma categoria");
 }
 
+$sql = "UPDATE noticia SET titulo = :titulo, texto = :texto, data = :data, categoria_id = :categoria_id WHERE id = :id LIMIT 1";
+
 if (empty($id)) {
-  //gravar os dados no banco - inset
-  $sql = "INSERT INTO noticia VALUES (NULL, '{$titulo}', '{$texto}', '{$data}', '{$categoria_id}')";
-} else {
-  //atualizar os dados no banco - update
-  $sql = "UPDATE noticia SET titulo = '{$titulo}', texto = '{$texto}', data = '{$data}', categoria_id = '{categoria_id}' WHERE id = {$id} LIMIT 1";
+  $sql = "INSERT INTO noticia VALUES (NULL, :titulo, :texto, :data, :categoria_id)";
 }
 
-echo $sql;
+$conn->beginTransaction();
+$stmt = $conn->prepare($sql);
+$stmt->bindValue(":titulo", $titulo);
+$stmt->bindValue(":texto", $texto);
+$stmt->bindValue(":data", $data);
+$stmt->bindValue(":categoria_id", $categoria_id);
+if ($id) {
+  $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+}
 
-//executar o sql
-if (mysqli_query($con, $sql)) {
-  mensagem("Registro salvo com sucesso");
+try {
+  $stmt->execute();
+
+  $result = $stmt->rowCount();
+  $conn->commit();
+} catch (PDOException $e) {
+  echo $e->getMessage();
+  $conn->rollBack();
+}
+
+if ($result > 0) {
+  mensagem("O registro foi salvo com sucesso!");
 } else {
-  mensagem("Erro ao salvar registro");
+  mensagem("Erro ao salvar o registro");
 }

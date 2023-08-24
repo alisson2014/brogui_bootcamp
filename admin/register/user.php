@@ -10,16 +10,10 @@
 <hr>
 <?php
 
-//verificar se esta sendo enviado um id
 if (isset($_GET["id"])) {
-  //recuperar o id e transformar em inteiro
   $id = (int)$_GET["id"];
-  //sql para buscar o usuario
-  $sqlUser = "SELECT * FROM usuario WHERE id = {$id}";
-  //executar o sql
-  $consulta = mysqli_query($con, $sqlUser);
-  //separar os dados
-  $dados = mysqli_fetch_array($consulta);
+  $sqlUser = "SELECT * FROM usuario WHERE id = ?";
+  $dados = $conn->query($sql)->fetch();
 }
 
 $id = $dados["id"] ?? NULL;
