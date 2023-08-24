@@ -16,7 +16,10 @@ $categoria = NULL;
 if (!empty($id)) {
   $id = (int)$id;
   $sql = "SELECT * FROM categoria WHERE id = ?";
-  $dados = $conn->query($sql)->fetch();
+  $stmt = $conn->prepare($sql);
+  $stmt->bindValue(1, $id, PDO::PARAM_INT);
+  $stmt->execute();
+  $dados = $stmt->fetch();
 
   $id = $dados["id"] ?? NULL;
   $categoria = $dados["categoria"] ?? NULL;

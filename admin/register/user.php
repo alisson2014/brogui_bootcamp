@@ -13,7 +13,10 @@
 if (isset($_GET["id"])) {
   $id = (int)$_GET["id"];
   $sqlUser = "SELECT * FROM usuario WHERE id = ?";
-  $dados = $conn->query($sql)->fetch();
+  $stmt = $conn->prepare($sqlUser);
+  $stmt->bindValue(1, $id, PDO::PARAM_INT);
+  $stmt->execute();
+  $dados = $stmt->fetch();
 }
 
 $id = $dados["id"] ?? NULL;

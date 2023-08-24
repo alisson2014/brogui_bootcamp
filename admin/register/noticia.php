@@ -9,16 +9,13 @@
 </p>
 <hr>
 <?php
-//verificar se existe id sendo enviado
 if (isset($_GET["id"])) {
-  //recuperar a variavel
   $id = (int)$_GET["id"];
-  //selecionar o registro do banco
-  $sqlNoticia = "SELECT * FROM noticia WHERE id = {$id}";
-  //executar o sql
-  $consulta = mysqli_query($con, $sqlNoticia);
-  //separar os dados
-  $dados = mysqli_fetch_array($consulta);
+  $sqlNoticia = "SELECT * FROM noticia WHERE id = ?";
+  $stmt = $conn->prepare($sqlNoticia);
+  $stmt->bindValue(1, $id, PDO::PARAM_INT);
+  $stmt->execute();
+  $dados = $stmt->fetch();
 }
 
 $id = $dados["id"] ?? NULL;

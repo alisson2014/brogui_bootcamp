@@ -42,12 +42,12 @@ $stmt->bindValue(":email", $email);
 $stmt->bindValue(":login", $login);
 $stmt->bindValue(":senha", $senha);
 
-if (empty($id)) {
+if (isset($id)) {
   $stmt->bindValue(":id", $id, PDO::PARAM_INT);
 }
 
-if (empty($senha)) {
-  $stmt->bindValue(":senha", $senha, PDO::PARAM_INT);
+if (isset($senha)) {
+  $stmt->bindValue(":senha", $senha);
 }
 
 try {

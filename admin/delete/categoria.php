@@ -7,7 +7,7 @@ if (empty($id)) {
 } else {
   $id = (int)$id;
   $sql = "DELETE FROM categoria WHERE id = ? LIMIT 1";
-  $conn->begginTransaction();
+  $conn->beginTransaction();
   $stmt = $conn->prepare($sql);
   $stmt->bindValue(1, $id, PDO::PARAM_INT);
 
