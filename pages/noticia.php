@@ -1,25 +1,20 @@
 <?php
-//recuperar o id enviado por get
 $id = $_GET["id"] ?? NULL;
 
-//echo $id;
-//verificar se o id está em branco
 if (empty($id)) {
     echo "<p>Notícia inválida</p>";
 } else {
-    //sql para consultar a noticia
     $sql = "SELECT *, date_format(data, '%d/%m/%Y') data 
-            FROM noticia WHERE id = {$id}";
-    //executar o comando sql
-    $consulta = mysqli_query($con, $sql);
-    //separar os dados para mostrar na tela
-    $dados = mysqli_fetch_array($consulta);
+            FROM noticia WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $dataNews = $stmt->fetch();
 
-    //separar os dados
-    $id = $dados["id"];
-    $titulo = $dados["titulo"];
-    $data = $dados["data"];
-    $texto = $dados["texto"];
+    $id = $dataNews["id"];
+    $titulo = $dataNews["titulo"];
+    $data = $dataNews["data"];
+    $texto = $dataNews["texto"];
 
     echo "<h1 style='
         font-size: 2rem;

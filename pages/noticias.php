@@ -1,17 +1,14 @@
 <link rel="stylesheet" href="css/stylepages.css">
 <h1>Todas as Notícias</h1>
 <?php
-//sql para buscar as 5 ultimas noticias
 $sql = "SELECT id, titulo, date_format(data, '%d/%m/%Y') data
         FROM noticia ORDER BY DATA DESC";
-//executar o sql
-$consulta = mysqli_query($con, $sql);
+$news = $conn->query($sql)->fetchAll();
 
-//separar os dados do sql
-while ($dados = mysqli_fetch_array($consulta)) {
-    $id = $dados["id"];
-    $titulo = $dados["titulo"];
-    $data = $dados["data"];
+foreach ($news as $new) {
+    $id = $new["id"];
+    $titulo = $new["titulo"];
+    $data = $new["data"];
 
     echo "
             <div class='noticia'>
@@ -22,6 +19,6 @@ while ($dados = mysqli_fetch_array($consulta)) {
                 <a href='index.php?pagina=noticia&id={$id}'>Ler Notícia</a>
             </div>
             <hr>
-        ";
+    ";
 }
 ?>

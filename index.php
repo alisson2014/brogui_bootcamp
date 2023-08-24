@@ -1,7 +1,4 @@
-<?php
-//Incluir o arquivo do banco de dados
-include "config.php";
-?>
+<?php require_once "config.php"; ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -46,12 +43,9 @@ include "config.php";
         <div class="grid">
             <div class="coluna">
                 <?php
-                //recuperar a pagina para abrir
                 $pagina = $_GET["pagina"] ?? "home";
-                // home -> pages/home.php
                 $pagina = "pages/{$pagina}.php";
 
-                //verificar se a página existe
                 if (file_exists($pagina)) {
                     include $pagina;
                 } else {
@@ -65,18 +59,12 @@ include "config.php";
 
                     <ul>
                         <?php
-                        //sql para buscar os dados
-                        $sql = "select * from noticia
-                        order by data desc limit 3";
-                        //executar o SQL
-                        $consulta = mysqli_query($con, $sql);
-                        //mostrar noticia por noticia
-                        while ($dados = mysqli_fetch_array($consulta)) {
-                            //recuperar as variaveis
-                            $titulo = $dados["titulo"];
-                            $id = $dados["id"];
+                        $sql = "SELECT * FROM noticia ORDER BY data DESC LIMIT 3";
+                        $newsList = $conn->query($sql)->fetchAll();
+                        foreach ($newsList as $news) {
+                            $titulo = $news["titulo"];
+                            $id = $news["id"];
 
-                            //titulo maiusculo
                             $titulo = strtoupper($titulo);
 
                             echo "

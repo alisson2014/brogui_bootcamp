@@ -22,16 +22,14 @@
   </thead>
   <tbody>
     <?php
-    //selecionar as categorias
     $sql = "SELECT * FROM usuario";
-    //executar o sql
-    $consulta = mysqli_query($con, $sql);
-    //laço de repetição para retirar os resultados
-    while ($dados = mysqli_fetch_array($consulta)) {
-      $id = $dados["id"];
-      $nome = $dados["nome"];
-      $login = $dados["login"];
-      $email = $dados["email"];
+    $dados = $conn->query($sql)->fetchAll();
+
+    foreach ($dados as $dado) {
+      $id = $dado["id"];
+      $nome = $dado["nome"];
+      $login = $dado["login"];
+      $email = $dado["email"];
     ?>
       <tr>
         <td> <?= $id ?> </td>

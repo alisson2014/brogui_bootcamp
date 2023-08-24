@@ -16,14 +16,12 @@
   </thead>
   <tbody>
     <?php
-    //selecionar as categorias
     $sql = "SELECT * FROM categoria ORDER BY categoria";
-    //executar o sql
-    $consulta = mysqli_query($con, $sql);
+    $dados = $conn->query($sql)->fetchAll();
     //laço de repetição para retirar os resultados
-    while ($dados = mysqli_fetch_array($consulta)) {
-      $id = $dados["id"];
-      $categoria = $dados["categoria"];
+    foreach ($dados as $dado) {
+      $id = $dado["id"];
+      $categoria = $dado["categoria"];
 
     ?>
       <tr>

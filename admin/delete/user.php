@@ -1,17 +1,27 @@
 <?php
-//recuperar o id
 $id = $_GET["id"] ?? NULL;
 
-//verificar se o id esta em branco
 if (empty($id)) {
   mensagem("Registro inválido");
 } else {
-  //transformar o ID para inteiro
   $id = (int)$id;
-  //sql para excluir 
-  $sql = "DELETE FROM usuario WHERE id = {$id} LIMIT 1";
-  //executar o SQL
-  if (mysqli_query($con, $sql)) {
+  $sql = "DELETE FROM usuario WHERE id = :id LIMIT 1";
+
+  $conn->beginTransaction();
+  $stmt = $conn->prepare($sql);
+  $stmt->bindValue(1, $id, PDO::PARAM_INT);
+
+  try {
+    $stmt->execute();
+
+    $result = $stmt->rowCount();
+    $conn->commit();
+  } catch (PDOException $e) {
+    echo $e->getMessage();
+    $conn->rollBack();
+  }
+
+  if ($result > 0) {
     mensagem("Registro excluido");
   } else {
     mensagem("Erro ao excluir registro");

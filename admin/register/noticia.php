@@ -9,16 +9,13 @@
 </p>
 <hr>
 <?php
-//verificar se existe id sendo enviado
 if (isset($_GET["id"])) {
-  //recuperar a variavel
   $id = (int)$_GET["id"];
-  //selecionar o registro do banco
-  $sqlNoticia = "SELECT * FROM noticia WHERE id = {$id}";
-  //executar o sql
-  $consulta = mysqli_query($con, $sqlNoticia);
-  //separar os dados
-  $dados = mysqli_fetch_array($consulta);
+  $sqlNoticia = "SELECT * FROM noticia WHERE id = ?";
+  $stmt = $conn->prepare($sqlNoticia);
+  $stmt->bindValue(1, $id, PDO::PARAM_INT);
+  $stmt->execute();
+  $dados = $stmt->fetch();
 }
 
 $id = $dados["id"] ?? NULL;
@@ -48,14 +45,12 @@ $categoria_id = $dados["categoria_id"] ?? NULL;
   <select name="categoria_id" id="categoria_id" required class="campo">
     <option value=""></option>
     <?php
-    //selecionar todas as categorias
     $sql = "SELECT * FROM categoria ORDER BY categoria";
-    //executar o sql
-    $consulta = mysqli_query($con, $sql);
-    while ($dados = mysqli_fetch_array($consulta)) {
-      //recuperar os valores 
-      $id = $dados["id"];
-      $categoria = $dados["categoria"];
+    $dados = $conn->query($sql)->fetchAll();
+
+    foreach ($dados as $dado) {
+      $id = $dado["id"];
+      $categoria = $dado["categoria"];
 
       echo "<option value='{$id}'>{$categoria}</option>";
     }

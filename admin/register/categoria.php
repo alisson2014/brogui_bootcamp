@@ -10,20 +10,16 @@
 </p>
 <hr>
 <?php
-//recuperar o ID
 $id = $_GET["id"] ?? NULL;
 $categoria = NULL;
-//verificar se existe um id sendo enviado
+
 if (!empty($id)) {
   $id = (int)$id;
-  //echo "O ID é: {$id}";
-
-  //sql para trazer os dados do id
-  $sql = "SELECT * FROM categoria WHERE id = {$id}";
-  //executar o sql
-  $consulta = mysqli_query($con, $sql);
-  //separar os dados
-  $dados = mysqli_fetch_array($consulta);
+  $sql = "SELECT * FROM categoria WHERE id = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bindValue(1, $id, PDO::PARAM_INT);
+  $stmt->execute();
+  $dados = $stmt->fetch();
 
   $id = $dados["id"] ?? NULL;
   $categoria = $dados["categoria"] ?? NULL;

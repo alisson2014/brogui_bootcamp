@@ -2,16 +2,12 @@
 <h1>Categorias de Notícias</h1>
 <ul>
     <?php
-    //selecionar as categorias
-    $sql = "SELECT * FROM categoria ORDER BY
-        categoria";
-    //executar a consulta
-    $consulta = mysqli_query($con, $sql);
+    $sql = "SELECT * FROM categoria ORDER BY categoria";
+    $categories = $conn->query($sql)->fetchAll();
 
-    //separar os resultados
-    while ($dados = mysqli_fetch_array($consulta)) {
-        $id = $dados["id"];
-        $categoria = $dados["categoria"];
+    foreach ($categories as $categorie) {
+        $id = $categorie["id"];
+        $categoria = $categorie["categoria"];
 
         echo "
                 <li>
