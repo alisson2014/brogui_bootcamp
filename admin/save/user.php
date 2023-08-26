@@ -23,7 +23,7 @@ if (empty($id)) {
 
   $senha = password_hash($senha, PASSWORD_DEFAULT);
 
-  $sql = "INSERT INTO usuario VALUES (NULL, :nome, :email, :login, :senha)";
+  $sql = "INSERT INTO usuario VALUES (:id, :nome, :email, :login, :senha)";
 } else if (empty($senha)) {
   $sql = "UPDATE usuario 
     SET nome = :nome, login = :login, email = :email
@@ -40,15 +40,10 @@ $stmt = $conn->prepare($sql);
 $stmt->bindValue(":nome", $nome);
 $stmt->bindValue(":email", $email);
 $stmt->bindValue(":login", $login);
-$stmt->bindValue(":senha", $senha);
+$stmt->bindValue(":id", $id ?? null);
+$stmt->bindValue(":senha", $senha ?? null);
 
-if (isset($id)) {
-  $stmt->bindValue(":id", $id, PDO::PARAM_INT);
-}
-
-if (isset($senha)) {
-  $stmt->bindValue(":senha", $senha);
-}
+$result = 0;
 
 try {
   $stmt->execute();
@@ -56,12 +51,12 @@ try {
   $result = $stmt->rowCount();
   $conn->commit();
 } catch (PDOException $e) {
-  echo $e->getMessage();
+  $error = $e->getMessage();
   $conn->rollBack();
 }
 
 if ($result > 0) {
   mensagem("O registro foi salvo com sucesso!");
 } else {
-  mensagem("Erro ao salvar o registro");
+  mensagem("Erro ao salvar o registro.\n Erro: {$error}");
 }
