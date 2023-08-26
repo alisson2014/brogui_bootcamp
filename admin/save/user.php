@@ -16,24 +16,19 @@ if (empty($nome)) {
   mensagem("A senha digitada não é igual a senha redigitada");
 }
 
-if (empty($id)) {
-  if (empty($senha)) {
-    mensagem("Digite uma senha");
-  }
+$sql = "UPDATE usuario 
+        SET nome = :nome, login = :login, email = :email, senha = :senha 
+        WHERE id = :id";
 
-  $senha = password_hash($senha, PASSWORD_DEFAULT);
+if (empty($id)) {
+  if (empty($senha)) mensagem("Digite uma senha");
 
   $sql = "INSERT INTO usuario VALUES (:id, :nome, :email, :login, :senha)";
 } else if (empty($senha)) {
-  $sql = "UPDATE usuario 
-    SET nome = :nome, login = :login, email = :email
-    WHERE id = :id LIMIT 1";
-} else {
-  $senha = password_hash($senha, PASSWORD_DEFAULT);
-  $sql = "UPDATE usuario 
-      SET nome = :nome, login = :login, email = :email, senha = :senha 
-      WHERE id = :id LIMIT 1";
+  $sql = "UPDATE usuario SET nome = :nome, login = :login, email = :email WHERE id = :id";
 }
+
+if (isset($senha)) $senha = password_hash($senha, PASSWORD_DEFAULT);
 
 $conn->beginTransaction();
 $stmt = $conn->prepare($sql);
