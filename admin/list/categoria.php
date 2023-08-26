@@ -18,11 +18,9 @@
     <?php
     $sql = "SELECT * FROM categoria ORDER BY categoria";
     $dados = $conn->query($sql)->fetchAll();
-    //laço de repetição para retirar os resultados
     foreach ($dados as $dado) {
       $id = $dado["id"];
       $categoria = $dado["categoria"];
-
     ?>
       <tr>
         <td> <?= $id ?> </td>

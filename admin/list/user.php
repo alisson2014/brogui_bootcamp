@@ -54,7 +54,6 @@
 <script>
   function excluir(id) {
     if (confirm("Deseja realmente excluir este registro")) {
-      //chamar a tela de excluir
       location.href = "index.php?acao=delete&tabela=user&id=" + id;
     }
   }
