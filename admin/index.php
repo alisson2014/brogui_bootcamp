@@ -21,9 +21,9 @@ require_once "../config.php";
 <body>
   <div class="container">
     <?php
-    if (!isset($_SESSION["brogui"])) {
+    if (!isset($_SESSION["brogui"])) :
       require_once "login.php";
-    } else {
+    else :
       $login = $_SESSION["brogui"]["login"];
     ?>
       <header>
@@ -49,9 +49,7 @@ require_once "../config.php";
               </a>
             </li>
             <li>
-              <a href="exit.php" class="anim-link">
-                Olá <?= $login ?>, Sair.
-              </a>
+              <a href="exit.php" class="anim-link">Olá <?= $login ?>, Sair.</a>
             </li>
           </ul>
         </nav>
@@ -63,7 +61,6 @@ require_once "../config.php";
 
         $arquivo = "{$acao}/{$tabela}.php";
 
-        //verificar se o arquivo existe
         if (file_exists($arquivo)) {
           require_once $arquivo;
         } else {
@@ -72,13 +69,9 @@ require_once "../config.php";
         ?>
       </main>
       <footer>
-        <p style="text-align: center;">
-          Desenvolvido por Alisson
-        </p>
+        <p style="text-align: center;">Desenvolvido por Alisson</p>
       </footer>
-    <?php
-    }
-    ?>
+    <?php endif; ?>
   </div>
 </body>
 
