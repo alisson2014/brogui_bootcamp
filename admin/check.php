@@ -3,12 +3,6 @@
 session_start();
 require_once "../config.php";
 
-$trim = [
-  "options" => function (string $value): string {
-    return trim($value);
-  }
-];
-
 $login = filter_input(INPUT_POST, "login", FILTER_CALLBACK, $trim);
 $password = filter_input(INPUT_POST, "password", FILTER_CALLBACK, $trim);
 
@@ -20,7 +14,7 @@ if (empty($login)) {
 
 $sql = "SELECT * FROM usuario WHERE login = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bindValue(1, $login, PDO::PARAM_INT);
+$stmt->bindValue(1, $login);
 $stmt->execute();
 $data = $stmt->fetch();
 
