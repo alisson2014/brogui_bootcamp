@@ -3,22 +3,16 @@
 <table>
   <thead>
     <tr>
-      <td width="12%">
-        ID
-      </td>
-      <td width="54%">
-        Titulo da noticia
-      </td>
-      <td width="34%">
-        OPÇÕES
-      </td>
+      <td width="12%">ID</td>
+      <td width="54%">Titulo da noticia</td>
+      <td width="34%">OPÇÕES</td>
     </tr>
   </thead>
   <tbody>
     <?php
-    $sql = "SELECT * FROM noticia";
+    $sql = "SELECT id, titulo FROM noticia";
     $dados = $conn->query($sql)->fetchAll();
-    foreach ($dados as $dado) {
+    foreach ($dados as $dado) :
       $id = $dado["id"];
       $titulo = $dado["titulo"];
     ?>
@@ -35,15 +29,12 @@
           </a>
         </td>
       </tr>
-    <?php
-    }
-    ?>
+    <?php endforeach; ?>
   </tbody>
 </table>
 <script>
   function excluir(id) {
     if (confirm("Deseja realmente excluir este registro")) {
-      //chamar a tela de excluir
       location.href = "index.php?acao=delete&tabela=noticia&id=" + id;
     }
   }

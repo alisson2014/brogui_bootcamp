@@ -3,21 +3,11 @@
 <table>
   <thead>
     <tr>
-      <td width="11%">
-        ID
-      </td>
-      <td width="30%">
-        Nome
-      </td>
-      <td width="30%">
-        Login
-      </td>
-      <td width="21%">
-        Email
-      </td>
-      <td width="8%">
-        Opções
-      </td>
+      <td width="11%">ID</td>
+      <td width="30%">Nome</td>
+      <td width="30%">Login</td>
+      <td width="21%">Email</td>
+      <td width="8%">Opções</td>
     </tr>
   </thead>
   <tbody>
@@ -25,7 +15,7 @@
     $sql = "SELECT * FROM usuario";
     $dados = $conn->query($sql)->fetchAll();
 
-    foreach ($dados as $dado) {
+    foreach ($dados as $dado) :
       $id = $dado["id"];
       $nome = $dado["nome"];
       $login = $dado["login"];
@@ -46,9 +36,7 @@
           </a>
         </td>
       </tr>
-    <?php
-    }
-    ?>
+    <?php endforeach; ?>
   </tbody>
 </table>
 <script>
