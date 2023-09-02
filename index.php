@@ -14,6 +14,7 @@
     <!-- CSS + Favicon -->
     <link rel="shortcut icon" href="imagens/icone.png" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/stylepages.css" />
 </head>
 
 <body>

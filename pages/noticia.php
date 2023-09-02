@@ -1,15 +1,20 @@
 <?php
-$id = $_GET["id"] ?? NULL;
+
+$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
 if (empty($id)) {
     echo "<p>Notícia inválida</p>";
-} else {
-    $sql = "SELECT *, date_format(data, '%d/%m/%Y') data 
+    exit;
+}
+
+$sql = "SELECT *, date_format(data, '%d/%m/%Y') data 
             FROM noticia WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindValue(1, $id, PDO::PARAM_INT);
-    $stmt->execute();
-    $dataNews = $stmt->fetch();
+$stmt = $conn->prepare($sql);
+$stmt->bindValue(1, $id, PDO::PARAM_INT);
+$stmt->execute();
+$dataNews = $stmt->fetch();
+
+if ($dataNews) {
 
     $id = $dataNews["id"];
     $titulo = $dataNews["titulo"];
@@ -28,4 +33,6 @@ if (empty($id)) {
     font-style: italic;
     '>Data da Postagem: {$data}</p>";
     echo nl2br($texto);
+} else {
+    echo "<p>Noticia não encontrada!</p>";
 }
