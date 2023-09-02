@@ -1,7 +1,7 @@
 <?php
 
-$id = trim($_POST["id"] ?? NULL);
-$categoria = trim($_POST["categoria"] ?? NULL);
+$id = filter_input(INPUT_POST, "id", FILTER_CALLBACK, $trim);
+$categoria = filter_input(INPUT_POST, "categoria", FILTER_CALLBACK, $trim);
 
 if (empty($categoria)) {
   mensagem("Preencha a categoria");
@@ -15,8 +15,11 @@ if (empty($id)) {
 
 $conn->beginTransaction();
 $stmt = $conn->prepare($sql);
-$stmt->bindValue(":categoria", $categoria, PDO::PARAM_STR);
-if (!empty($id)) $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+$stmt->bindValue(":categoria", $categoria);
+if (!empty($id)) {
+  $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+}
+
 $result = 0;
 
 try {

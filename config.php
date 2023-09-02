@@ -11,6 +11,15 @@ $trim = [
     }
 ];
 
+$emailValidate = [
+    "options" => function (string $value): string|false {
+        $trimmedValue = trim($value);
+        $filter = filter_var($trimmedValue, FILTER_VALIDATE_EMAIL);
+
+        return $filter;
+    }
+];
+
 try {
     $conn = new PDO(CONFIG, USER, PASSWORD);
     $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);

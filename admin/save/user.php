@@ -1,18 +1,22 @@
 <?php
-$id = trim($_POST["id"] ?? NULL);
-$nome = trim($_POST["nome"] ?? NULL);
-$email = trim($_POST["email"] ?? NULL);
-$login = trim($_POST["login"] ?? NULL);
-$senha = trim($_POST["senha"] ?? NULL);
-$senha2 = trim($_POST["senha2"] ?? NULL);
+
+$id = filter_input(INPUT_POST, "id", FILTER_CALLBACK, $trim);
+$nome = filter_input(INPUT_POST, "nome", FILTER_CALLBACK, $trim);
+$email = filter_input(INPUT_POST, "email", FILTER_CALLBACK, $emailValidate);
+$login = filter_input(INPUT_POST, "login", FILTER_CALLBACK, $trim);
+$senha = filter_input(INPUT_POST, "senha", FILTER_CALLBACK, $trim);
+$senha2 = filter_input(INPUT_POST, "senha2", FILTER_CALLBACK, $trim);
+
+var_dump($email);
+exit;
 
 if (empty($nome)) {
   mensagem("Preencha o nome");
 } else if (empty($login)) {
   mensagem("Preencha o login");
-} else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+} else if (empty($email)) {
   mensagem("Preencha um email valido");
-} else if ($senha != $senha2) {
+} else if ($senha !== $senha2) {
   mensagem("A senha digitada não é igual a senha redigitada");
 }
 
