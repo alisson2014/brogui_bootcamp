@@ -16,7 +16,7 @@
   </thead>
   <tbody>
     <?php
-    $sql = "SELECT * FROM categoria ORDER BY categoria";
+    $sql = "SELECT id, categoria FROM categoria ORDER BY categoria";
     $dados = $conn->query($sql)->fetchAll();
     foreach ($dados as $dado) {
       $id = $dado["id"];
