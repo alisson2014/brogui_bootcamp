@@ -9,8 +9,10 @@
 </p>
 <hr>
 <?php
-if (isset($_GET["id"])) {
-  $id = (int)$_GET["id"];
+
+$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
+
+if (!empty($id)) {
   $sqlNoticia = "SELECT * FROM noticia WHERE id = ?";
   $stmt = $conn->prepare($sqlNoticia);
   $stmt->bindValue(1, $id, PDO::PARAM_INT);
@@ -18,31 +20,32 @@ if (isset($_GET["id"])) {
   $dados = $stmt->fetch();
 }
 
-$id = $dados["id"] ?? NULL;
-$titulo = $dados["titulo"] ?? NULL;
-$texto = $dados["texto"] ?? NULL;
-$data = $dados["data"] ?? NULL;
-$categoria_id = $dados["categoria_id"] ?? NULL;
+$id = $dados["id"] ?? null;
+$titulo = $dados["titulo"] ?? null;
+$texto = $dados["texto"] ?? null;
+$data = $dados["data"] ?? null;
+$categoria_id = $dados["categoria_id"] ?? null;
+
 ?>
 
 <form name="formCadastro" method="post" action="index.php?acao=save&tabela=noticia">
   <!-- Campo id: -->
   <label for="id">ID: </label>
-  <input type="text" readonly name="id" id="id" class="campo" value="<?= $id ?>">
+  <input type="number" name="id" id="id" class="campo" value="<?= $id ?>" readonly />
   <!-- Campo titulo -->
   <label for="titulo">Titulo da notícia: </label>
-  <input type="text" name="titulo" id="titulo" class="campo" value="<?= $titulo ?>" required>
+  <input type="text" name="titulo" id="titulo" class="campo" value="<?= $titulo ?>" required />
   <!--Campo texto-->
   <label for="texto">Texto da notícia:</label>
   <textarea name="texto" id="texto" rows="6" required>
-    <?= $texto ?>
+  <?= $texto ?>
   </textarea>
   <!-- Campo data -->
   <label for="data">Data da publicação:</label>
-  <input type="date" name="data" id="data" required class="campo" value="<?= $data ?>">
+  <input type="date" name="data" id="data" class="campo" value="<?= $data ?>" required />
   <!-- Campo categoria -->
   <label for="categoria_id">Selecione uma categoria</label>
-  <select name="categoria_id" id="categoria_id" required class="campo">
+  <select name="categoria_id" id="categoria_id" class="campo" required>
     <option value=""></option>
     <?php
     $sql = "SELECT * FROM categoria ORDER BY categoria";

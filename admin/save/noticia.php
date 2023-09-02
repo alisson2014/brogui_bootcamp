@@ -1,10 +1,10 @@
 <?php
 
-$id = trim($_POST["id"] ?? NULL);
-$titulo = trim($_POST["titulo"] ?? NULL);
-$texto = trim($_POST["texto"] ?? NULL);
-$data = trim($_POST["data"] ?? NULL);
-$categoria_id = trim($_POST["categoria_id"] ?? NULL);
+$id = filter_input(INPUT_POST, "id", FILTER_CALLBACK, $trim);
+$titulo = filter_input(INPUT_POST, "titulo", FILTER_CALLBACK, $trim);
+$texto = filter_input(INPUT_POST, "texto", FILTER_CALLBACK, $trim);
+$data = filter_input(INPUT_POST, "data", FILTER_CALLBACK, $trim);
+$categoria_id = filter_input(INPUT_POST, "categoria_id", FILTER_CALLBACK, $trim);
 
 if (empty($titulo)) {
   mensagem("Preencha o título");
@@ -28,9 +28,11 @@ $stmt->bindValue(":titulo", $titulo);
 $stmt->bindValue(":texto", $texto);
 $stmt->bindValue(":data", $data);
 $stmt->bindValue(":categoria_id", $categoria_id);
-if ($id) {
+if (!empty($id)) {
   $stmt->bindValue(":id", $id, PDO::PARAM_INT);
 }
+
+$result = 0;
 
 try {
   $stmt->execute();

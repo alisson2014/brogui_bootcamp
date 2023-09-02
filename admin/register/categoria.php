@@ -10,27 +10,27 @@
 </p>
 <hr>
 <?php
-$id = $_GET["id"] ?? NULL;
-$categoria = NULL;
+
+$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
+$categoria = null;
 
 if (!empty($id)) {
-  $id = (int)$id;
   $sql = "SELECT * FROM categoria WHERE id = ?";
   $stmt = $conn->prepare($sql);
   $stmt->bindValue(1, $id, PDO::PARAM_INT);
   $stmt->execute();
   $dados = $stmt->fetch();
 
-  $id = $dados["id"] ?? NULL;
-  $categoria = $dados["categoria"] ?? NULL;
+  $id = $dados["id"] ?? null;
+  $categoria = $dados["categoria"] ?? null;
 }
 ?>
 <form name="formregister" method="post" action="index.php?acao=save&tabela=categoria">
   <label for="id">ID:</label>
-  <input type="text" name="id" id="id" class="campo" value="<?= $id ?>" readonly>
+  <input type="number" name="id" id="id" class="campo" value="<?= $id ?>" readonly />
 
   <label for="categoria">Digite a Categoria: </label>
-  <input type="text" name="categoria" id="categoria" class="campo" value="<?= $categoria ?>" required>
+  <input type="text" name="categoria" id="categoria" class="campo" value="<?= $categoria ?>" required />
   <br>
   <button type="submit">Gravar Dados</button>
 </form>

@@ -1,9 +1,9 @@
 <?php
-$id = $_GET["id"] ?? NULL;
+
+$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
 if (empty($id)) mensagem("Registro inválido");
 
-$id = (int)$id;
 $sql = "DELETE FROM usuario WHERE id = ?";
 
 $conn->beginTransaction();

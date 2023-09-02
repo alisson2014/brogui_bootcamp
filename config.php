@@ -5,6 +5,21 @@ const PASSWORD = "";
 const DATA_BASE = "brogui";
 const CONFIG = "mysql:host=" . SERVER . ";dbname=" . DATA_BASE . ";charset=utf8;";
 
+$trim = [
+    "options" => function (string $value): string {
+        return trim($value);
+    }
+];
+
+$emailValidate = [
+    "options" => function (string $value): string|false {
+        $trimmedValue = trim($value);
+        $filter = filter_var($trimmedValue, FILTER_VALIDATE_EMAIL);
+
+        return $filter;
+    }
+];
+
 try {
     $conn = new PDO(CONFIG, USER, PASSWORD);
     $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
